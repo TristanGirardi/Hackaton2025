@@ -43,7 +43,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="QuickCheck"
         options={{
-          title: 'Quick Check',
+          title: 'QuickCheck',
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="cross.fill" color={color} />,
         }}
       />

@@ -14,14 +14,15 @@ interface DayObject {
 const CalendarWidget: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState<string>('');
 
-  // Define the type for day parameter as DayObject
   const onDayPress = (day: DayObject) => {
     setSelectedDate(day.dateString);
   };
 
   return (
     <View style={styles.widgetContainer}>
-      <Text style={styles.header}>Calendar Widget</Text>
+      <Text style={styles.reminderHeader}>
+        Never Forget Your Doctor Appointments or Medication Again! Add reminders here!
+      </Text>
       <Calendar
         onDayPress={onDayPress}
         markedDates={{
@@ -41,27 +42,35 @@ const CalendarWidget: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
-  widgetContainer: {
-    padding: 20,
-    backgroundColor: '#f0f0f0',
-    borderRadius: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.5,
-    elevation: 5,
-    margin: 10,
-  },
-  header: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 10,
-  },
-  selectedDate: {
-    marginTop: 10,
-    fontSize: 16,
-    color: '#333',
-  },
+    widgetContainer: {
+        padding: 20,
+        backgroundColor: '#f0f0f0',
+        borderRadius: 10,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.5,
+        elevation: 5,
+        margin: 10,
+      },
+      reminderHeader: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: '#000', // Changed to black
+        textAlign: 'center',
+        marginBottom: 15,
+      },
+      header: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginBottom: 10,
+      },
+      selectedDate: {
+        marginTop: 10,
+        fontSize: 16,
+        color: '#333',
+        textAlign: 'center',
+      },
 });
 
 export default CalendarWidget;

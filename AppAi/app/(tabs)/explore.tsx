@@ -19,7 +19,6 @@ export default function ExploreScreen() {
     if (!input.trim()) return;
     setLoading(true);
     setTimeout(() => {
-      
       setResponse('Simulated response for: ' + input);
       setLoading(false);
     }, 2000); 
@@ -63,42 +62,42 @@ export default function ExploreScreen() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#121212', // Dark background
+    backgroundColor: 'white', // Dark background to match the theme
   },
   container: {
     flex: 1,
     padding: 20,
     alignItems: 'center',
-    backgroundColor: '#121212', // Dark background matching safe area
+    //backgroundColor: 'grey', // Dark background to match the theme
   },
   text: {
     fontSize: 28,
     fontWeight: 'bold',
-    color: '#00ffcc', // Neon color for the title
+    color: 'black', 
     marginBottom: 20,
   },
   input: {
     width: '100%',
     height: 120,
-    borderColor: '#00ffcc', // Neon border color for the input
+    borderColor: 'white',
     borderWidth: 2,
     borderRadius: 12,
     padding: 15,
     marginBottom: 20,
-    backgroundColor: '#1e1e1e', // Darker background for the input
-    color: '#fff', // White text inside the input
+    backgroundColor: '#1e1e1e', // Slightly darker background for input box
+    color: '#fff', // White text for readability
     fontSize: 16,
   },
   button: {
     width: '100%',
     padding: 15,
-    backgroundColor: '#00ffcc', // Neon green button
+    backgroundColor: '#2980B9', 
     borderRadius: 12,
     alignItems: 'center',
     marginBottom: 20,
   },
   buttonText: {
-    color: '#121212', // Dark color for button text
+    color: 'white', 
     fontSize: 18,
     fontWeight: 'bold',
   },
@@ -106,7 +105,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
     marginTop: 20,
-    backgroundColor: '#1e1e1e', // Dark background for the response area
+    backgroundColor: '#1e1e1e', // Dark background for response area
     padding: 15,
     borderRadius: 12,
   },
@@ -115,5 +114,3 @@ const styles = StyleSheet.create({
     color: '#fff', // White text for the response
   },
 });
-
-
