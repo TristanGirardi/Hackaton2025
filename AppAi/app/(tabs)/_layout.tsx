@@ -40,6 +40,13 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="bolt.fill" color={color} />,
         }}
       />
+      <Tabs.Screen
+        name="QuickCheck"
+        options={{
+          title: 'Quick Check',
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="cross.fill" color={color} />,
+        }}
+      />
     </Tabs>
   );
 }
