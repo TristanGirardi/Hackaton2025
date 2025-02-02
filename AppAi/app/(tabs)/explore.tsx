@@ -1,109 +1,119 @@
-import { StyleSheet, Image, Platform } from 'react-native';
+import React, { useState } from 'react';
+import {
+  SafeAreaView,
+  StyleSheet,
+  TextInput,
+  ScrollView,
+  Text,
+  View,
+  TouchableOpacity,
+  ActivityIndicator,
+} from 'react-native';
 
-import { Collapsible } from '@/components/Collapsible';
-import { ExternalLink } from '@/components/ExternalLink';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
-import { IconSymbol } from '@/components/ui/IconSymbol';
+export default function ExploreScreen() {
+  const [input, setInput] = useState(''); 
+  const [response, setResponse] = useState(''); 
+  const [loading, setLoading] = useState(false);
 
-export default function TabTwoScreen() {
+  const handleSend = () => {
+    if (!input.trim()) return;
+    setLoading(true);
+    setTimeout(() => {
+      
+      setResponse('Simulated response for: ' + input);
+      setLoading(false);
+    }, 2000); 
+  };
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
-      headerImage={
-        <IconSymbol
-          size={310}
-          color="#808080"
-          name="chevron.left.forwardslash.chevron.right"
-          style={styles.headerImage}
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.container}>
+        <Text style={styles.text}>Chat with Dr.AI!</Text>
+        
+        {/* Input for user's question */}
+        <TextInput
+          style={styles.input}
+          placeholder="Ask a question..."
+          placeholderTextColor="#888"
+          value={input}
+          onChangeText={setInput}
+          multiline
         />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Explore</ThemedText>
-      </ThemedView>
-      <ThemedText>This app includes example code to help you get started.</ThemedText>
-      <Collapsible title="File-based routing">
-        <ThemedText>
-          This app has two screens:{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/explore.tsx</ThemedText>
-        </ThemedText>
-        <ThemedText>
-          The layout file in <ThemedText type="defaultSemiBold">app/(tabs)/_layout.tsx</ThemedText>{' '}
-          sets up the tab navigator.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/router/introduction">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Android, iOS, and web support">
-        <ThemedText>
-          You can open this project on Android, iOS, and the web. To open the web version, press{' '}
-          <ThemedText type="defaultSemiBold">w</ThemedText> in the terminal running this project.
-        </ThemedText>
-      </Collapsible>
-      <Collapsible title="Images">
-        <ThemedText>
-          For static images, you can use the <ThemedText type="defaultSemiBold">@2x</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">@3x</ThemedText> suffixes to provide files for
-          different screen densities
-        </ThemedText>
-        <Image source={require('@/assets/images/react-logo.png')} style={{ alignSelf: 'center' }} />
-        <ExternalLink href="https://reactnative.dev/docs/images">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Custom fonts">
-        <ThemedText>
-          Open <ThemedText type="defaultSemiBold">app/_layout.tsx</ThemedText> to see how to load{' '}
-          <ThemedText style={{ fontFamily: 'SpaceMono' }}>
-            custom fonts such as this one.
-          </ThemedText>
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/versions/latest/sdk/font">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Light and dark mode components">
-        <ThemedText>
-          This template has light and dark mode support. The{' '}
-          <ThemedText type="defaultSemiBold">useColorScheme()</ThemedText> hook lets you inspect
-          what the user's current color scheme is, and so you can adjust UI colors accordingly.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/develop/user-interface/color-themes/">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Animations">
-        <ThemedText>
-          This template includes an example of an animated component. The{' '}
-          <ThemedText type="defaultSemiBold">components/HelloWave.tsx</ThemedText> component uses
-          the powerful <ThemedText type="defaultSemiBold">react-native-reanimated</ThemedText>{' '}
-          library to create a waving hand animation.
-        </ThemedText>
-        {Platform.select({
-          ios: (
-            <ThemedText>
-              The <ThemedText type="defaultSemiBold">components/ParallaxScrollView.tsx</ThemedText>{' '}
-              component provides a parallax effect for the header image.
-            </ThemedText>
-          ),
-        })}
-      </Collapsible>
-    </ParallaxScrollView>
+        
+        {/* Send button */}
+        <TouchableOpacity style={styles.button} onPress={handleSend}>
+          <Text style={styles.buttonText}>Send</Text>
+        </TouchableOpacity>
+
+        {/* Scrollable response area */}
+        <ScrollView style={styles.responseContainer}>
+          {loading ? (
+            <ActivityIndicator size="large" color="#00ff00" />
+          ) : (
+            <Text style={styles.responseText}>
+              {response || 'The response will appear here.'}
+            </Text>
+          )}
+        </ScrollView>
+      </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  headerImage: {
-    color: '#808080',
-    bottom: -90,
-    left: -35,
-    position: 'absolute',
+  safeArea: {
+    flex: 1,
+    backgroundColor: '#121212', // Dark background
   },
-  titleContainer: {
-    flexDirection: 'row',
-    gap: 8,
+  container: {
+    flex: 1,
+    padding: 20,
+    alignItems: 'center',
+    backgroundColor: '#121212', // Dark background matching safe area
+  },
+  text: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#00ffcc', // Neon color for the title
+    marginBottom: 20,
+  },
+  input: {
+    width: '100%',
+    height: 120,
+    borderColor: '#00ffcc', // Neon border color for the input
+    borderWidth: 2,
+    borderRadius: 12,
+    padding: 15,
+    marginBottom: 20,
+    backgroundColor: '#1e1e1e', // Darker background for the input
+    color: '#fff', // White text inside the input
+    fontSize: 16,
+  },
+  button: {
+    width: '100%',
+    padding: 15,
+    backgroundColor: '#00ffcc', // Neon green button
+    borderRadius: 12,
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  buttonText: {
+    color: '#121212', // Dark color for button text
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  responseContainer: {
+    flex: 1,
+    width: '100%',
+    marginTop: 20,
+    backgroundColor: '#1e1e1e', // Dark background for the response area
+    padding: 15,
+    borderRadius: 12,
+  },
+  responseText: {
+    fontSize: 16,
+    color: '#fff', // White text for the response
   },
 });
+
+
